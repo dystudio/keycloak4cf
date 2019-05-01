@@ -1,0 +1,30 @@
+---
+applications:
+- name: keycloak-poc
+  docker:
+    image: i6ecloud/keycloak4cf:latest
+  instances: 2
+  memory: 2GB
+  disk_quota: 2G
+  health-check-type: port
+  routes:
+    - route: keycloak-poc.apps.internal
+    - route: keycloak-poc.example.com
+  env: 
+    PROXY_ADDRESS_FORWARDING: true
+    KEYCLOAK_HOSTNAME: keycloak-poc.example.com
+    KEYCLOAK_ALWAYS_HTTPS: true
+    KEYCLOAK_HTTP_PORT: 80
+    KEYCLOAK_HTTPS_PORT: 443
+    DB_VENDOR: postgres
+    DB_ADDR: 10.11.12.13
+    DB_PORT: 5432
+    DB_DATABASE:  keycloak-poc-db
+    DB_USER: keycloak-poc-appuser
+    DB_PASSWORD: appuser-pa55w0rd
+    KEYCLOAK_USER: admin
+    KEYCLOAK_PASSWORD: admin-pa55w0rd
+    JGROUPS_DISCOVERY_PROTOCOL: dns.DNS_PING
+    JGROUPS_DISCOVERY_PROPERTIES: dns_query=keycloak-poc.apps.internal,dns_record_type=A
+    KEYCLOAK_LOGLEVEL: INFO
+    ROOT_LOGLEVEL: INFO
