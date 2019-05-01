@@ -56,7 +56,7 @@ This fix was released in `JGroups 4.0.15.Final`, that is used in `Infinispan Cor
 
 - [Official Keycloak Docker Image](https://hub.docker.com/r/jboss/keycloak/)
 - [Keycloak for CF](docker/keycloak4cf)
-- [Keycloak for CF + debug tools](docker/keycloak4cf-debug) based on [Keycloak + debug tools](docker/keycloak-docker-debug)
+- [Keycloak for CF + debug tools](docker/keycloak4cf-debug) based on [Keycloak + debug tools](docker/keycloak-debug)
 
 ## CF Manifests
 
