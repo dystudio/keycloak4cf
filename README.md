@@ -7,10 +7,7 @@ Kyecloak using Infinispan to cache: realms, users, sessions and more. If you wan
 
 ## Quick Start
 
-1. Make sure that you can use (is enabled by CF operator):
-  - [CF internal routing](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#internal-routes)
-  - [CF network policy](https://docs.cloudfoundry.org/devguide/deploy-apps/cf-networking.html)
-  - [CF diego docker](https://docs.cloudfoundry.org/adminguide/docker.html#enable)
+1. Make sure that you can use (is enabled by CF operator): [CF internal routing](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#internal-routes), [CF network policy](https://docs.cloudfoundry.org/devguide/deploy-apps/cf-networking.html), [CF diego docker](https://docs.cloudfoundry.org/adminguide/docker.html#enable).
 2. Modify (domains, database access, passwords) and use this application manifest [`manifest.yml`](cf-manifests/manifest.yml)
 3. Push the app `cf push`
 4. Add network policy: `cf add-network-policy keycloak-poc --destination-app keycloak-poc --protocol tcp --port 7600`
@@ -25,14 +22,14 @@ You can check the cluster using `jboss-cli`:
 - `/subsystem=jgroups/channel=ee:read-attribute(name=view)`
 
 The result should contains as many instances as you declare:
-```
+```json
 {
-    "outcome" => "success",
-    "result" => "[70d3d988-fb5a-4ceb-406c-6d04|1] (2) [70d3d988-fb5a-4ceb-406c-6d04, 14a493d4-3a48-4323-6287-7c56]"
+"outcome" => "success",
+"result" => "[70d3d988-fb5a-4ceb-406c-6d04|1] (2) [70d3d988-fb5a-4ceb-406c-6d04, 14a493d4-3a48-4323-6287-7c56]"
 }
 ``` 
 
-If your cluster doesn't work please go to the "Debugging" section.
+If your cluster doesn't work please go to the [Debugging](#debugging) section.
 
 ## Under the Hood
 
