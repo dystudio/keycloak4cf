@@ -54,9 +54,10 @@ This fix was released in `JGroups 4.0.15.Final`, that is used in `Infinispan Cor
 
 ## Keycloak Docker Repos
 
-- [Official Keycloak Docker Image](https://hub.docker.com/r/jboss/keycloak/)
-- [Keycloak for CF](docker/keycloak4cf)
-- [Keycloak for CF + debug tools](docker/keycloak4cf-debug) based on [Keycloak + debug tools](docker/keycloak-debug)
+- Official Keycloak Docker Image - [`jboss/keycloak`](https://hub.docker.com/r/jboss/keycloak/)
+- [Keycloak for CF](docker/keycloak4cf) - [`i6ecloud/keycloak4cf`](https://cloud.docker.com/u/i6ecloud/repository/docker/i6ecloud/keycloak4cf)
+- [Keycloak for CF + debug tools](docker/keycloak4cf-debug) - [`i6ecloud/keycloak4cf-debug`](https://cloud.docker.com/u/i6ecloud/repository/docker/i6ecloud/keycloak4cf-debug)
+  - based on [Keycloak + debug tools](docker/keycloak-debug) - [`i6ecloud/keycloak-debug`](https://cloud.docker.com/u/i6ecloud/repository/docker/i6ecloud/keycloak-debug)
 
 ## CF Manifests
 
@@ -67,15 +68,18 @@ It is based on this docker image `i6ecloud/keycloak4cf:latest`.
 
 ### Debugging
 
+Using official Keycloak docker image you can:
+
+- check logs: `tail -f /opt/jboss/keycloak/standalone/log/*.log`
+- restart Keycloak: `/opt/jboss/keycloak/bin/jboss-cli.sh  --connect command=:reload`
+- check the cluster: `/opt/jboss/keycloak/bin/jboss-cli.sh -c` and then `/subsystem=jgroups/channel=ee:read-attribute(name=view)`
+
 If you want to debug use this application manifest [`manifest-debug.yml`](cf-manifests/manifest-debug.yml) based on this docker image `i6ecloud/keycloak4cf-debug:latest`.
 
 Now you can:
 - get super user rights: `sudo su`, password for jboss user is now `jboss`
 - use tcpdump and analize the result using Wireshark: `tcpdump -s 0  -i eth0 -w /tmp/tcpdump.pcap`
-- restart Keycloak: `/opt/jboss/keycloak/bin/jboss-cli.sh  --connect command=:reload`
 - check DNS entry: `host keycloak-poc-debug.apps.internal`
 - check network configuration: `ip a`
 - netcat: `nc -tvn  10.255.244.233 7600`
-- check debug logs: `tail -f /opt/jboss/keycloak/standalone/log/*.log`
-- check the cluster: `/opt/jboss/keycloak/bin/jboss-cli.sh -c` and then `/subsystem=jgroups/channel=ee:read-attribute(name=view)`
-
+- and more :)
