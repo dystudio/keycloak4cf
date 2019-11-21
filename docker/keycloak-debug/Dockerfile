@@ -1,4 +1,4 @@
-FROM jboss/keycloak:latest
+FROM jboss/keycloak:8.0.0
 
 USER root
 RUN yum install -y mc && yum install -y tcpdump && yum install -y bind-utils && yum install -y iproute && yum install -y nmap && yum install -y sudo
